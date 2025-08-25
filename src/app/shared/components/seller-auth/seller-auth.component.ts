@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
@@ -14,18 +14,30 @@ import { SignUp } from '../../../dataType';
 })
 export class SellerAuthComponent {
   constructor(private seller: SellerService, private router: Router) {}
+  showLogin=false;
+  authError:string = '';
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.seller.reloadSeller()
+  }
 
   signup(data: SignUp): void {
+    console.warn(data);
     this.seller.userSignup(data)
   }
+  login(data: SignUp): void{
+    this.authError="";
+    this.seller.userLogin(data)
+    this.seller.isLoginError.subscribe((isError)=>{
+      if(isError){
+        this.authError="Email or Password is Not Correct";
+      }
+    })
+  }
+  openLogin(){
+    this.showLogin=true
+  }
+  openSignUP(){
+    this.showLogin=false;
+  }
 }
-
-  // signup(data: SignUp): void {
-  //   this.seller.userSignup(data).subscribe((result) => {
-  //     if (result) {
-  //       this.router.navigate(['seller-home']);
-  //     }
-  //   });
-  // }

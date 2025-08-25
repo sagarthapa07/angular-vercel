@@ -37,6 +37,11 @@
     height: 35px;
 }
 
+h1 a {
+    color: blueviolet;
+    text-decoration: none;
+}
+
 .nav .nav-search .btn {
     color: blueviolet;
     border: 1px solid blueviolet;

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./layout/header/header.component";
+import { SellerService } from './core/sellerservice/seller.service';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,8 @@ import { HeaderComponent } from "./layout/header/header.component";
 })
 export class AppComponent {
   title = 'angular-vercel';
+  constructor(private seller:SellerService){}
+  ngOnInit():void{
+    this.seller.reloadSeller()
+  }
 }
