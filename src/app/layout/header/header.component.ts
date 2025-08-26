@@ -4,7 +4,6 @@ import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from "@angular/common";
 
 
-
 @Component({
   selector: 'app-header',
   imports: [RouterLink, NgIf, CommonModule],
@@ -12,7 +11,8 @@ import { CommonModule } from "@angular/common";
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-menuType: String = 'default'
+menuType: string = 'default'
+sellerName:string = ''
   constructor(private route :Router){}
 
   ngOnInit(): void{
@@ -22,6 +22,11 @@ menuType: String = 'default'
         if(localStorage.getItem('seller') && val.url.includes('seller')){
           console.warn("in seller aRea");
           this.menuType ="seller"
+          if(localStorage.getItem('seller')){
+            let sellerStore=localStorage.getItem('seller');
+            let sellerData=sellerStore && JSON.parse(sellerStore)[0]; 
+            this.sellerName=sellerData.name;
+          }
         }else{
           console.warn("outSide Seller");
           this.menuType="default"
@@ -29,6 +34,8 @@ menuType: String = 'default'
       }
     })
   }
-
-
+  logout(){
+    localStorage.removeItem('seller')
+    this.route.navigate(['/']);
+  } 
 }
