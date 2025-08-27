@@ -20,7 +20,7 @@ sellerName:string = ''
     this.route.events.subscribe((val:any)=>{
       if(val.url){
         if(localStorage.getItem('seller') && val.url.includes('seller')){
-          console.warn("in seller aRea");
+          // console.warn("in seller aRea");
           this.menuType ="seller"
           if(localStorage.getItem('seller')){
             let sellerStore=localStorage.getItem('seller');
@@ -28,7 +28,7 @@ sellerName:string = ''
             this.sellerName=sellerData.name;
           }
         }else{
-          console.warn("outSide Seller");
+          // console.warn("outSide Seller");
           this.menuType="default"
         }
       }
