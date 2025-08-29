@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../../core/sellerservice/products.service';
 import { Product } from '../../../dataType';
 
+
 @Component({
   selector: 'app-seller-add-product',
   imports: [FormsModule],
