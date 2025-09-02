@@ -25,11 +25,13 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path:'seller-update-product',
+        path:'seller-update-product/:id',
         component:SellerUpdateProductComponent,
         canActivate: [AuthGuard]
     },
     
+
+
 
 
 

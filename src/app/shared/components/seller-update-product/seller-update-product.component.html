@@ -1,6 +1,8 @@
-<div class="add-product">
+<div class="update-product">
     <h1>Update Product</h1>
-    <form #addProduct="ngForm" (ngSubmit)="submit()" class="common-form">
+    <form #addProduct="ngForm" 
+    (ngSubmit)="submit(addProduct.value)"
+    class="common-form">
         <input type="text"
         class="form-input"
         placeholder="Enter Product"

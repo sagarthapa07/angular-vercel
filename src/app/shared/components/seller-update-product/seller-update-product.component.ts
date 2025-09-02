@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ProductsService } from '../../../core/sellerservice/products.service';
 
 @Component({
   selector: 'app-seller-update-product',
@@ -8,7 +10,19 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './seller-update-product.component.css'
 })
 export class SellerUpdateProductComponent {
-submit(){
+  constructor(private route: ActivatedRoute, private product:ProductsService){}
+
+ngOnInit(): void {
+  debugger
+  let productID = this.route.snapshot.paramMap.get('id');
+  console.log(productID);
+  productID &&  this.product.getProduct(productID).subscribe((data)=>{
+    console.warn(data);
+  })
+}
+
+submit(productData:any){
 
 }
+
 }
