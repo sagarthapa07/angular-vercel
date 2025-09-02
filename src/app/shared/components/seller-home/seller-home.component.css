@@ -14,3 +14,9 @@ img{
     width: 100px;
     height: 10%;
 }
+table td, table th{
+    border: 1px solid ;
+}
+.adjust-update-link{
+    margin-left: 10px ;
+}
