@@ -12,19 +12,32 @@ import { Product } from '../../../dataType';
 })
 export class SellerUpdateProductComponent {
   productData: undefined | Product
-  constructor(private route: ActivatedRoute, private product:ProductsService){}
+  productMessage: undefined | string
+  constructor(private route: ActivatedRoute, private product: ProductsService) { }
 
-ngOnInit(): void {
-  let productID = this.route.snapshot.paramMap.get('id');
-  console.log(productID);
-  productID &&  this.product.getProduct(productID).subscribe((data)=>{
+  ngOnInit(): void {
+    let productID = this.route.snapshot.paramMap.get('id');
+    console.log(productID);
+    productID && this.product.getProduct(productID).subscribe((data) => {
+      console.warn(data);
+      this.productData = data
+    })
+  }
+
+  submit(data: Product) {
     console.warn(data);
-    this.productData = data
-  })
-}
+    if(this.productData){
+      data.id = this.productData.id
+    }
 
-submit(productData:any){  
-
-}
+    this.product.updateProduct(data).subscribe((result) => {
+      if (result) {
+        this.productMessage = "Product is Updated"
+      }
+    })
+    setTimeout(() => {
+      this.productMessage = undefined
+    }, 3000)
+  }
 
 }
