@@ -22,7 +22,7 @@ export class SellerHomeComponent {
 
 
 
- ngOnInit():void{
+ngOnInit():void{
   this.list();
  }
 deleteProduct(id:string){

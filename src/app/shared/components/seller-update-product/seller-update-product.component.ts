@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../../core/sellerservice/products.service';
+import { Product } from '../../../dataType';
 
 @Component({
   selector: 'app-seller-update-product',
@@ -10,18 +11,19 @@ import { ProductsService } from '../../../core/sellerservice/products.service';
   styleUrl: './seller-update-product.component.css'
 })
 export class SellerUpdateProductComponent {
+  productData: undefined | Product
   constructor(private route: ActivatedRoute, private product:ProductsService){}
 
 ngOnInit(): void {
-  debugger
   let productID = this.route.snapshot.paramMap.get('id');
   console.log(productID);
   productID &&  this.product.getProduct(productID).subscribe((data)=>{
     console.warn(data);
+    this.productData = data
   })
 }
 
-submit(productData:any){
+submit(productData:any){  
 
 }
 
