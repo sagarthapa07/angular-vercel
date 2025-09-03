@@ -11,25 +11,25 @@ import { SellerUpdateProductComponent } from './shared/components/seller-update-
 export const routes: Routes = [
 
     {
-        path:'seller-auth',
-        component:SellerAuthComponent
+        path: 'seller-auth',
+        component: SellerAuthComponent
     },
     {
-        path:'seller-home',
-        component:SellerHomeComponent,
+        path: 'seller-home',
+        component: SellerHomeComponent,
         canActivate: [AuthGuard]
     },
     {
-        path:'seller-add-product',
-        component:SellerAddProductComponent,
+        path: 'seller-add-product',
+        component: SellerAddProductComponent,
         canActivate: [AuthGuard]
     },
     {
-        path:'seller-update-product/:id',
-        component:SellerUpdateProductComponent,
+        path: 'seller-update-product/:id',
+        component: SellerUpdateProductComponent,
         canActivate: [AuthGuard]
     },
-    
+
 
 
 
@@ -38,10 +38,10 @@ export const routes: Routes = [
 
 
     {
-        path:'',
-        component:HomeComponent
+        path: '',
+        component: HomeComponent
     },
-    
 
-    
+
+
 ]

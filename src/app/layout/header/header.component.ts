@@ -25,7 +25,7 @@ sellerName:string = ''
           if(localStorage.getItem('seller')){
             let sellerStore=localStorage.getItem('seller');
             let sellerData=sellerStore && JSON.parse(sellerStore)[0]; 
-            this.sellerName=sellerData.name;
+            this.sellerName=sellerData && sellerData.name ? sellerData.name : '';
           }
         }else{
           // console.warn("outSide Seller");

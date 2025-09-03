@@ -23,7 +23,7 @@ export class ProductsService {
   updateProduct(product:Product){
     return this.http.put<Product>(`http://localhost:3000/products/${product.id}`,product)
   }
-  popularProducts(product:Product){
-    return this.http.get("http://localhost:3000/products?_limit=3")
+  popularProducts(){
+    return this.http.get<Product[]>("http://localhost:3000/products?_limit=5")
   }
 }

@@ -30,3 +30,13 @@ body {
 .message_p{
     color: green;
 }
+.carousal-caption{
+    border-color: #00000082;
+    border-radius: 5px;
+
+}
+.carousel-control-next-icon, .carousel-control-prev-icon{
+    background-color: black;
+    border-radius: 5px;
+
+}
