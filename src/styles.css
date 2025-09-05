@@ -4,10 +4,10 @@ body {
     font-family: sans-serif;
 }
 
-.container {
+/* .container {
     margin-left: 5%;
     margin-right: 5%;
-}
+} */
 .common-form {
     text-align: center;
     display: flex;
@@ -38,5 +38,4 @@ body {
 .carousel-control-next-icon, .carousel-control-prev-icon{
     background-color: black;
     border-radius: 5px;
-
 }
