@@ -6,6 +6,7 @@ import { SellerHomeComponent } from './shared/components/seller-home/seller-home
 import { AuthGuard } from './core/guards/auth.guard';
 import { SellerAddProductComponent } from './shared/components/seller-add-product/seller-add-product.component';
 import { SellerUpdateProductComponent } from './shared/components/seller-update-product/seller-update-product.component';
+import { SearchComponent } from './shared/components/search/search.component';
 
 
 export const routes: Routes = [
@@ -28,6 +29,10 @@ export const routes: Routes = [
         path: 'seller-update-product/:id',
         component: SellerUpdateProductComponent,
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'search/:query',
+        component: SearchComponent,
     },
 
 
