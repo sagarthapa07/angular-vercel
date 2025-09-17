@@ -17,6 +17,7 @@ export class HeaderComponent {
   menuType: string = 'default'
   sellerName: string = ''
   searchResult: undefined | Product[];
+
   constructor(private route: Router, private product: ProductsService) { }
 
   ngOnInit(): void {
@@ -45,9 +46,7 @@ export class HeaderComponent {
   searchProduct(query: KeyboardEvent) {
     if (query) {
       const element = query.target as HTMLInputElement;
-      // console.warn(element.value);
       this.product.searchProducts(element.value).subscribe((result) => {
-        // console.warn(result);
         if(result.length>5){
           result.length= 5;
         }
@@ -60,5 +59,8 @@ export class HeaderComponent {
   }
   submitSearch(val:string){
     this.route.navigate([`search/${val}`])
+  }
+  redirectToDetail(id:number){
+    this.route.navigate(['/details/'+id])
   }
 }

@@ -5,11 +5,12 @@ import { NgIf } from '@angular/common';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgForOf } from '@angular/common';
 import { warn } from 'node:console';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgIf, NgbCarouselModule, NgForOf],
+  imports: [NgIf, NgbCarouselModule, NgForOf, RouterLink],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

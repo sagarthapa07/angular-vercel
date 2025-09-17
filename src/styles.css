@@ -11,6 +11,7 @@ body {
 .common-form {
     text-align: center;
     display: flex;
+    justify-content: center ;
     flex-direction: column;
     width: 300px;
     margin: auto;

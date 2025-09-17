@@ -12,16 +12,20 @@ import { Product } from '../../../dataType';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  searchResult: undefined |Product[]
+  searchResult: Product[] = [];
   constructor(private activeRoute: ActivatedRoute, private product: ProductsService) { }
 
   ngOnInit(): void {
     this.activeRoute.paramMap.subscribe(params => {
       const query = params.get('query');
-      console.warn('Route param:', query);
-      query && this.product.searchProducts(query).subscribe((result)=>{
-        this.searchResult=result
-      })
+      console.warn(query);
+      if (query) {
+        this.product.searchProducts(query).subscribe((result) => {
+        this.searchResult = result || []
+        });
+      }else{
+        this.searchResult = []
+      }
     });
   }
 }

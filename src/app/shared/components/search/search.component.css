@@ -19,3 +19,10 @@
 .search-item span{
     margin-right: 10px;
 }
+.notFoundTemplate{
+    display: flex;
+    color: red;
+    justify-content: center;
+    margin-top: 50px;
+    height: 100vh;
+}

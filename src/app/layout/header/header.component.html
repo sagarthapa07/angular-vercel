@@ -6,21 +6,23 @@
         <input type="text"
         #searchInput
         (keyup)="searchProduct($event)" 
+        (keyup.enter)="submitSearch(searchInput.value)"
         (blur)="hideSearch()" 
         placeholder="Search For Products">
+        
         <button (click)="submitSearch(searchInput.value) " class="btn">Search</button>
         <ul class="suggested-result" *ngIf="searchResult">
             <li *ngFor="let item of searchResult">
-                <a href="">{{item.name}}</a>
+                <a (mousedown)="redirectToDetail(item.id)">{{item.name}}</a>
             </li>
         </ul>
     </div>
     <div [ngSwitch]="menuType">
         <ul *ngSwitchCase="'default'">
-            <li><a routerLink="">Home</a></li>
             <li><a routerLink="seller-auth">Seller</a></li>
-            <li><a routerLink="">Login</a></li>
-            <li><a routerLink="">Cart(0)</a></li>
+            <li><a routerLink="">Home</a></li>
+            <li><a routerLink="user-auth">Login/Signup</a></li>
+            <li><a routerLink="#">Cart(0)</a></li>
         </ul>
         <ul *ngSwitchCase="'seller'">
             <li><a routerLink="seller-add-product">Add Product</a></li>

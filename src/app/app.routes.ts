@@ -7,6 +7,9 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { SellerAddProductComponent } from './shared/components/seller-add-product/seller-add-product.component';
 import { SellerUpdateProductComponent } from './shared/components/seller-update-product/seller-update-product.component';
 import { SearchComponent } from './shared/components/search/search.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { ProductDetailsComponent } from './shared/components/product-details/product-details.component';
+import { UserAuthComponent } from './shared/components/user-auth/user-auth.component';
 
 
 export const routes: Routes = [
@@ -33,6 +36,18 @@ export const routes: Routes = [
     {
         path: 'search/:query',
         component: SearchComponent,
+    },
+    {
+        path: 'footer',
+        component: FooterComponent,
+    },
+    {
+        path: 'details/:productId',
+        component: ProductDetailsComponent,
+    },
+    {
+        path: 'user-auth',
+        component: UserAuthComponent,
     },
 
 
