@@ -5,5 +5,13 @@
     text-align: center;
 }
 .user-auth{
+    margin-bottom:100px ;
     height: 100vh;
+}
+.common-form a{
+ color: blueviolet;
+ cursor: pointer;
+}
+button:disabled{
+    cursor: not-allowed;
 }

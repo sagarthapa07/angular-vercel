@@ -44,4 +44,12 @@ export class ProductDetailsComponent {
     this.productData = result;
   })
  }
+ AddToCart(){
+  if(this.productData){
+    this.productData.quantity = this.productQuantity;
+    if(!localStorage.getItem('user')){
+    this.product.localAddToCart(this.productData)
+    }
+  }
+ }
 }

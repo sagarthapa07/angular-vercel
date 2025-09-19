@@ -17,11 +17,11 @@ export class HeaderComponent {
   menuType: string = 'default'
   sellerName: string = ''
   searchResult: undefined | Product[];
+  userName: string = ""
 
   constructor(private route: Router, private product: ProductsService) { }
 
   ngOnInit(): void {
-
     this.route.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('seller') && val.url.includes('seller')) {
@@ -32,6 +32,11 @@ export class HeaderComponent {
             let sellerData = sellerStore && JSON.parse(sellerStore)[0];
             this.sellerName = sellerData && sellerData.name ? sellerData.name : '';
           }
+        } else if (localStorage.getItem('user')) {
+          let userStore = localStorage.getItem('user')
+          let userData = userStore && JSON.parse(userStore);
+          this.userName = userData.name
+          this.menuType = 'user';
         } else {
           // console.warn("outSide Seller");
           this.menuType = "default"
@@ -43,24 +48,31 @@ export class HeaderComponent {
     localStorage.removeItem('seller')
     this.route.navigate(['/']);
   }
+
+  userLogout(){
+    localStorage.removeItem('user')
+    this.route.navigate(['/user-auth']);
+  }
+
   searchProduct(query: KeyboardEvent) {
     if (query) {
       const element = query.target as HTMLInputElement;
       this.product.searchProducts(element.value).subscribe((result) => {
-        if(result.length>5){
-          result.length= 5;
+        if (result.length > 5) {
+          result.length = 5;
         }
-        this.searchResult=result;
+        this.searchResult = result;
       })
     }
   }
-  hideSearch(){
+  hideSearch() {
     this.searchResult = undefined
   }
-  submitSearch(val:string){
+  submitSearch(val: string) {
     this.route.navigate([`search/${val}`])
   }
-  redirectToDetail(id:number){
-    this.route.navigate(['/details/'+id])
+  redirectToDetail(id: number) {
+    this.route.navigate(['/details/' + id])
   }
+
 }
