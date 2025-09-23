@@ -48,14 +48,7 @@ export const routes: Routes = [
     {
         path: 'user-auth',
         component: UserAuthComponent,
-    },
-
-
-
-
-
-
-
+    },  
 
     {
         path: '',
