@@ -18,6 +18,7 @@ export class HeaderComponent {
   sellerName: string = ''
   searchResult: undefined | Product[];
   userName: string = ""
+  cartItems = 0;
 
   constructor(private route: Router, private product: ProductsService) { }
 
@@ -42,6 +43,14 @@ export class HeaderComponent {
           this.menuType = "default"
         }
       }
+    });
+
+    let cartData = localStorage.getItem('localCart');
+    if(cartData){
+      this.cartItems=JSON.parse(cartData).length
+    }
+    this.product.cartData.subscribe((items)=>{
+      this.cartItems = items.length
     })
   }
   logout() {
@@ -74,5 +83,4 @@ export class HeaderComponent {
   redirectToDetail(id: number) {
     this.route.navigate(['/details/' + id])
   }
-
 }
