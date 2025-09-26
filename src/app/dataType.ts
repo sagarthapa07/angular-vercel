@@ -1,21 +1,34 @@
-export interface SignUp{
-    name:string,
-    password:string,
-    email:string
+export interface SignUp {
+    name: string,
+    password: string,
+    email: string
 }
 
-export interface Login{
+export interface Login {
 
-    email:string,
-    password:string
+    email: string,
+    password: string
 }
-export interface Product{
-    name:string,
-    price:number,
-    category:string,
-    color:string,
-    description:string,
-    image:string,
+export interface Product {
+    name: string,
+    price: number,
+    category: string,
+    color: string,
+    description: string,
+    image: string,
     id: number,
-    quantity:undefined | number,
+    quantity: undefined | number,
+}
+
+export interface Cart {
+    name: string,
+    price: number,
+    category: string,
+    color: string,
+    description: string,
+    image: string,
+    id: number| undefined ,
+    quantity: undefined | number,
+    userId: number,
+    productId: number
 }

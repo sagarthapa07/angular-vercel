@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Login, SignUp } from '../../../dataType';
+import { Login, Product, SignUp } from '../../../dataType';
 import { UserService } from '../../../core/sellerservice/user.service';
 import { RouterModule } from '@angular/router';
 
@@ -30,6 +30,8 @@ export class UserAuthComponent {
       console.warn("apple",result);
       if(result){
         this.authError="Please enter vaild user detials"
+      }else{
+        this.localCartToRemoteCart()
       }
       
     })
@@ -39,5 +41,22 @@ export class UserAuthComponent {
   }
   openSignup() {
     this.showLogin = true
+  }
+  localCartToRemoteCart(){
+    let data = localStorage.getItem('localCart');
+    console.warn(data);
+    if(data){
+      let cartDataList:Product[] = JSON.parse(data)
+      let user = localStorage.getItem('user');
+      let userID = user && JSON.parse(user).id;
+
+      cartDataList.forEach((product:Product) => {
+        // let cartData:cart={
+        //   ...product,
+        //   productID:product.id
+        //   userId
+        // }
+      });
+    }
   }
 }
