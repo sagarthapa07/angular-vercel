@@ -1,22 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Login, Product, SignUp } from '../../../dataType';
+import { Cart, Login, Product, SignUp } from '../../../dataType';
 import { UserService } from '../../../core/sellerservice/user.service';
 import { RouterModule } from '@angular/router';
+import { ProductsService } from '../../../core/sellerservice/products.service';
 
 
 
 @Component({
   selector: 'app-user-auth',
-  imports: [FormsModule, CommonModule,RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './user-auth.component.html',
   styleUrl: './user-auth.component.css'
 })
 export class UserAuthComponent {
   showLogin: boolean = true;
-  authError: string =""
-  constructor(private user: UserService) { }
+  authError: string = ""
+  constructor(private user: UserService, private product:ProductsService) { }
   ngOnInit() {
     this.user.userAuthReload();
   }
@@ -26,14 +27,14 @@ export class UserAuthComponent {
   }
   login(data: Login) {
     this.user.userLogin(data);
-    this.user.invalidUserAuth.subscribe((result)=>{
-      console.warn("apple",result);
-      if(result){
-        this.authError="Please enter vaild user detials"
-      }else{
+    this.user.invalidUserAuth.subscribe((result) => {
+      console.warn("apple", result);
+      if (result) {
+        this.authError = "Please enter vaild user detials"
+      } else {
         this.localCartToRemoteCart()
       }
-      
+
     })
   }
   openLogin() {
@@ -42,20 +43,32 @@ export class UserAuthComponent {
   openSignup() {
     this.showLogin = true
   }
-  localCartToRemoteCart(){
+  localCartToRemoteCart() {
     let data = localStorage.getItem('localCart');
     console.warn(data);
-    if(data){
-      let cartDataList:Product[] = JSON.parse(data)
+    if (data) {
+      let cartDataList: Product[] = JSON.parse(data)
       let user = localStorage.getItem('user');
-      let userID = user && JSON.parse(user).id;
+      let userId = user && JSON.parse(user).id;
 
-      cartDataList.forEach((product:Product) => {
-        // let cartData:cart={
-        //   ...product,
-        //   productID:product.id
-        //   userId
-        // }
+      cartDataList.forEach((product: Product,index: number) => {
+        let cartData: Cart = {
+          ...product,
+          productId: product.id,
+          userId
+        };
+
+        delete cartData.id;
+        setTimeout(()=>{
+                  this.product.addToCart(cartData).subscribe((result)=>{
+          if(result){
+            console.warn("Item Stored in DB");
+          }
+        })
+        if(cartDataList.length===index+1){
+          localStorage.removeItem('localCart');
+        }
+        },5000)
       });
     }
   }
