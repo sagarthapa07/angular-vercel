@@ -11,7 +11,7 @@ import { EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class UserService {
-invalidUserAuth = new EventEmitter<boolean>(false);
+  invalidUserAuth = new EventEmitter<boolean>(false);
   constructor(private http: HttpClient, private router: Router) { }
 
   userSignup(user: SignUp) {
@@ -26,15 +26,23 @@ invalidUserAuth = new EventEmitter<boolean>(false);
   userLogin(data: Login) {
     this.http.get<SignUp[]>(`http://localhost:3000/users?email=${data.email}&password=${data.password}`,
       { observe: "response" }).subscribe((result) => {
-        if(result && result.body?.length) {
+        if (result && result.body?.length) {
           this.invalidUserAuth.emit(false);
           localStorage.setItem('user', JSON.stringify(result.body[0]))
           this.router.navigate(['/'])
-        }else {
+        } else {
           console.warn('Login Failed');
           this.invalidUserAuth.emit(true);
         }
       })
+  }
+  isLoginUser() {
+    if (localStorage.getItem('user')) {
+      this.invalidUserAuth.emit(true);
+    } else {
+      this.invalidUserAuth.emit(false);
+    }
+
   }
   userAuthReload() {
     if (localStorage.getItem('user')) {

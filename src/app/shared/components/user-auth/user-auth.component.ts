@@ -17,7 +17,7 @@ import { ProductsService } from '../../../core/sellerservice/products.service';
 export class UserAuthComponent {
   showLogin: boolean = true;
   authError: string = ""
-  constructor(private user: UserService, private product:ProductsService) { }
+  constructor(private user: UserService, private product: ProductsService) { }
   ngOnInit() {
     this.user.userAuthReload();
   }
@@ -43,15 +43,15 @@ export class UserAuthComponent {
   openSignup() {
     this.showLogin = true
   }
+
   localCartToRemoteCart() {
     let data = localStorage.getItem('localCart');
+    let user = localStorage.getItem('user');
+    let userId = user && JSON.parse(user).id;
     console.warn(data);
     if (data) {
       let cartDataList: Product[] = JSON.parse(data)
-      let user = localStorage.getItem('user');
-      let userId = user && JSON.parse(user).id;
-
-      cartDataList.forEach((product: Product,index: number) => {
+      cartDataList.forEach((product: Product, index: number) => {
         let cartData: Cart = {
           ...product,
           productId: product.id,
@@ -59,17 +59,19 @@ export class UserAuthComponent {
         };
 
         delete cartData.id;
-        setTimeout(()=>{
-                  this.product.addToCart(cartData).subscribe((result)=>{
-          if(result){
-            console.warn("Item Stored in DB");
+        setTimeout(() => {
+          this.product.addToCart(cartData).subscribe((result) => {
+            if (result) {
+              console.warn("Item Stored in DB");
+            }
+          })
+          if (cartDataList.length === index + 1) {
+            localStorage.removeItem('localCart');
           }
-        })
-        if(cartDataList.length===index+1){
-          localStorage.removeItem('localCart');
-        }
-        },5000)
+        }, 5000)
       });
     }
+
+
   }
 }

@@ -26,7 +26,6 @@ export class HeaderComponent {
     this.route.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('seller') && val.url.includes('seller')) {
-          // console.warn("in seller aRea");
           this.menuType = "seller"
           if (localStorage.getItem('seller')) {
             let sellerStore = localStorage.getItem('seller');
@@ -38,18 +37,17 @@ export class HeaderComponent {
           let userData = userStore && JSON.parse(userStore);
           this.userName = userData.name
           this.menuType = 'user';
+          this.product.getCartList(userData.id)
         } else {
-          // console.warn("outSide Seller");
           this.menuType = "default"
         }
       }
     });
-
     let cartData = localStorage.getItem('localCart');
-    if(cartData){
-      this.cartItems=JSON.parse(cartData).length
+    if (cartData) {
+      this.cartItems = JSON.parse(cartData).length
     }
-    this.product.cartData.subscribe((items)=>{
+    this.product.cartData.subscribe((items) => {
       this.cartItems = items.length
     })
   }
@@ -58,7 +56,9 @@ export class HeaderComponent {
     this.route.navigate(['/']);
   }
 
-  userLogout(){
+  userLogout() {
+    this.cartItems = 0;
+    this.product.cartData.emit([]); 
     localStorage.removeItem('user')
     this.route.navigate(['/user-auth']);
   }
@@ -74,6 +74,7 @@ export class HeaderComponent {
       })
     }
   }
+
   hideSearch() {
     this.searchResult = undefined
   }
@@ -84,3 +85,5 @@ export class HeaderComponent {
     this.route.navigate(['/details/' + id])
   }
 }
+
+

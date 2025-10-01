@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cart, Product } from '../../dataType';
 import { EventEmitter } from '@angular/core';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -39,19 +40,20 @@ export class ProductsService {
     let localCart = localStorage.getItem('localCart');
     if (!localCart) {
       localStorage.setItem('localCart', JSON.stringify([data]));
+      this.cartData.emit([data]) 
     } else {
       cartData = JSON.parse(localCart);
       cartData.push(data);
       localStorage.setItem('localCart', JSON.stringify(cartData));
+      this.cartData.emit(cartData) 
     }
-    this.cartData.emit(cartData)   //ye subscribe kar sakte ha 
+      //ye subscribe kar sakte ha 
   }
   removeItemFromCart(productId: number) {
     let cartData = localStorage.getItem('localCart');
     if (cartData) {
       let items: Product[] = JSON.parse(cartData);
       items = items.filter((item: Product) => productId !== item.id)
-      console.warn(items);
       localStorage.setItem('localCart', JSON.stringify(items));
       this.cartData.emit(items);
     }
@@ -59,5 +61,18 @@ export class ProductsService {
 
   addToCart(cartData: Cart) {
     return this.http.post("http://localhost:3000/cart", cartData)
+  }
+  getCartList(userId:number){
+
+    this.http.get<Product[]>("http://localhost:3000/cart?userId="+userId,
+      {observe:'response'}).subscribe((result)=>{
+        // console.warn(result);
+        if(result && result.body){
+          this.cartData.emit(result.body)
+        }
+      })
+  }
+  removeCart(cartId:number){
+    return this.http.delete("http://localhost:3000/cart/"+ cartId);
   }
 } 
