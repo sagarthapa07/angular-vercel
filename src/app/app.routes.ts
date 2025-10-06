@@ -10,6 +10,8 @@ import { SearchComponent } from './shared/components/search/search.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ProductDetailsComponent } from './shared/components/product-details/product-details.component';
 import { UserAuthComponent } from './shared/components/user-auth/user-auth.component';
+import { CartPageComponent } from './shared/components/cart-page/cart-page.component';
+import { CheckOutComponent } from './shared/components/check-out/check-out.component';
 
 
 export const routes: Routes = [
@@ -50,6 +52,14 @@ export const routes: Routes = [
         component: UserAuthComponent,
     },  
 
+    {
+        path: 'cart-page',
+        component: CartPageComponent,
+    },
+    {
+        path: 'checkout',
+        component: CheckOutComponent,
+    },
     {
         path: '',
         component: HomeComponent

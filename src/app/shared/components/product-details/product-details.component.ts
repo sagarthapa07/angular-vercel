@@ -15,6 +15,7 @@ export class ProductDetailsComponent {
   removeCart = false
   constructor(private route: ActivatedRoute, private product: ProductsService) { }
   productQuantity: number = 1;
+  cartData: Product | undefined
 
 
   ngOnInit(): void {
@@ -46,6 +47,7 @@ export class ProductDetailsComponent {
         this.product.cartData.subscribe((result) => {
           let item = result.filter((item: Product) => productId?.toString() === item.productId?.toString())
           if (item.length) {
+            this.cartData = item[0];
             this.removeCart = true
           }
         })
@@ -91,7 +93,15 @@ export class ProductDetailsComponent {
       this.product.removeItemFromCart(productId);
       this.removeCart = false
     } else {
-
+      let user = localStorage.getItem('user');
+      let userId = user && JSON.parse(user).id
+      console.warn(this.cartData);
+      this.cartData && this.product.removeToCart(this.cartData.id).subscribe((result) => {
+        if (result) {
+          this.product.getCartList(userId);
+        }
+      })
+      this.removeCart = false;
     }
 
   }
