@@ -9,3 +9,8 @@
     margin-top: 15px;
     margin-bottom: 15px;
 }
+.error {
+  color: red;
+  font-size: 13px;
+  margin-bottom: 10px;
+}

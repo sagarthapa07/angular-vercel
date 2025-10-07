@@ -30,6 +30,7 @@ body {
 }
 .message_p{
     color: green;
+    text-align: center;
 }
 .carousal-caption{
     border-color: #00000082;

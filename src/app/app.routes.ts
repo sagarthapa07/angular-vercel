@@ -12,6 +12,7 @@ import { ProductDetailsComponent } from './shared/components/product-details/pro
 import { UserAuthComponent } from './shared/components/user-auth/user-auth.component';
 import { CartPageComponent } from './shared/components/cart-page/cart-page.component';
 import { CheckOutComponent } from './shared/components/check-out/check-out.component';
+import { MyOrdersComponent } from './shared/components/my-orders/my-orders.component';
 
 
 export const routes: Routes = [
@@ -59,6 +60,10 @@ export const routes: Routes = [
     {
         path: 'checkout',
         component: CheckOutComponent,
+    },
+    {
+        path: 'my-orders',
+        component: MyOrdersComponent,
     },
     {
         path: '',
